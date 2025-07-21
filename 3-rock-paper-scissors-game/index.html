@@ -14,17 +14,52 @@
         <h1>Rock Paper Scissors Game</h1>
         <p>Choose your move:</p>
         <div class="buttons">
-            <button id="rock">&#x1F44A;</button>
-            <button id="paper">&#x1f590;</button>
-            <button id="scissors">&#x270c;</button>
+            <button id="rock" @click="playGame('rock')">&#x1F44A;</button>
+            <button id="paper" @click="playGame('paper')">&#x1f590;</button>
+            <button id="scissors" @click="playGame('scissors')">&#x270c;</button>
         </div>
-        <p id="result"><!-- Aquí podrías poner que escoge la IA y el usuario...y si quieres el resultado del juego-->  </p>
+        <p id="result">{{ result }}</p>
         <p id="scores">
-            Your score: <span id="user-score"></span>
-            Computer score: <span id="computer-score"></span>
+            Your score:     <span id="user-score">{{ userScore }}</span><br>
+            Computer score: <span id="computer-score">{{ computerScore }}</span>
         </p>
     </div>
+<script type="module">
+    import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
+    createApp({
+      setup() {
+        const userScore = ref(0)
+        const computerScore = ref(0)
+        const result = ref('')
+
+        const playGame = (userChoice) => {
+          const choices = ['rock', 'paper', 'scissors']
+          const computerChoice = choices[Math.floor(Math.random() * choices.length)]
+          if (userChoice === computerChoice) {
+            result.value = `It's a tie! You both chose ${userChoice}.`
+          } else if (
+            (userChoice === 'rock' && computerChoice === 'scissors') ||
+            (userChoice === 'paper' && computerChoice === 'rock') ||
+            (userChoice === 'scissors' && computerChoice === 'paper')
+          ) {
+            result.value = `You win! ${userChoice} beats ${computerChoice}.`
+            userScore.value++
+          } else {
+            result.value = `You lose! ${computerChoice} beats ${userChoice}.`
+            computerScore.value++
+          }
+        }
+
+        return {
+          userScore,
+          computerScore,
+          result,
+          playGame
+        }
+      }
+    }).mount('#app')
+  </script>
 </body>
 
 </html>
