@@ -22,14 +22,14 @@
       <button @click="generatePassword" class="btn"> Generate</button>
     </div>
   </div>
-   
-<script type="module">
+
+  <script type="module">
     import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
     createApp({
       setup() {
         const characters = '0123456789abcdefghijklmnopqrstuvwxtz'
-        
+
         // Variable reactiva para almacenar el password generado
         const password = ref('')
 
@@ -42,7 +42,7 @@
           }
           password.value = newPassword
         }
-        
+
         return {
           password,
           generatePassword

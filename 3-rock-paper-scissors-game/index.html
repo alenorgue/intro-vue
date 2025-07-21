@@ -20,46 +20,46 @@
         </div>
         <p id="result">{{ result }}</p>
         <p id="scores">
-            Your score:     <span id="user-score">{{ userScore }}</span><br>
+            Your score: <span id="user-score">{{ userScore }}</span><br>
             Computer score: <span id="computer-score">{{ computerScore }}</span>
         </p>
     </div>
-<script type="module">
-    import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+    <script type="module">
+        import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
-    createApp({
-      setup() {
-        const userScore = ref(0)
-        const computerScore = ref(0)
-        const result = ref('')
+        createApp({
+            setup() {
+                const userScore = ref(0)
+                const computerScore = ref(0)
+                const result = ref('')
 
-        const playGame = (userChoice) => {
-          const choices = ['rock', 'paper', 'scissors']
-          const computerChoice = choices[Math.floor(Math.random() * choices.length)]
-          if (userChoice === computerChoice) {
-            result.value = `It's a tie! You both chose ${userChoice}.`
-          } else if (
-            (userChoice === 'rock' && computerChoice === 'scissors') ||
-            (userChoice === 'paper' && computerChoice === 'rock') ||
-            (userChoice === 'scissors' && computerChoice === 'paper')
-          ) {
-            result.value = `You win! ${userChoice} beats ${computerChoice}.`
-            userScore.value++
-          } else {
-            result.value = `You lose! ${computerChoice} beats ${userChoice}.`
-            computerScore.value++
-          }
-        }
+                const playGame = (userChoice) => {
+                    const choices = ['rock', 'paper', 'scissors']
+                    const computerChoice = choices[Math.floor(Math.random() * choices.length)]
+                    if (userChoice === computerChoice) {
+                        result.value = `It's a tie! You both chose ${userChoice}.`
+                    } else if (
+                        (userChoice === 'rock' && computerChoice === 'scissors') ||
+                        (userChoice === 'paper' && computerChoice === 'rock') ||
+                        (userChoice === 'scissors' && computerChoice === 'paper')
+                    ) {
+                        result.value = `You win! ${userChoice} beats ${computerChoice}.`
+                        userScore.value++
+                    } else {
+                        result.value = `You lose! ${computerChoice} beats ${userChoice}.`
+                        computerScore.value++
+                    }
+                }
 
-        return {
-          userScore,
-          computerScore,
-          result,
-          playGame
-        }
-      }
-    }).mount('#app')
-  </script>
+                return {
+                    userScore,
+                    computerScore,
+                    result,
+                    playGame
+                }
+            }
+        }).mount('#app')
+    </script>
 </body>
 
 </html>
