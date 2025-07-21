@@ -13,16 +13,43 @@
 </head>
 
 <body>
-  <div class="password-container">
-    <h2>Random Password Generator</h2>
-    <div class="input-container">
-      <input type="text" id="input" class="input" placeholder="Create Password" readonly />
+  <div id="app">
+    <div id="password-container">
+      <h2>Random Password Generator</h2>
+      <div class="input-container">
+        <input type="text" id="input" class="input" placeholder="Create Password" :value="password" readonly />
+      </div>
+      <button @click="generatePassword" class="btn"> Generate</button>
     </div>
-    <button class="btn">Generate</button>
   </div>
+   
+<script type="module">
+    import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
-  <!-- Aquí va VUE...pero recuerda también el contenedor id="app" -->
+    createApp({
+      setup() {
+        const characters = '0123456789abcdefghijklmnopqrstuvwxtz'
+        
+        // Variable reactiva para almacenar el password generado
+        const password = ref('')
 
+        // Función para generar un password seguro de 8 caracteres
+        const generatePassword = () => {
+          let newPassword = ''
+          for (let i = 0; i < 8; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length)
+            newPassword += characters[randomIndex]
+          }
+          password.value = newPassword
+        }
+        
+        return {
+          password,
+          generatePassword
+        }
+      }
+    }).mount('#app')
+  </script>
 </body>
 
 </html>

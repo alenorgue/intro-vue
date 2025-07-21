@@ -26,9 +26,8 @@
     </div>
   </main>
     <!-- Aquí va VUE...pero recuerda también el contenedor id="app" -->
-       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script>
-    const { createApp, ref } = Vue
+ <script type="module">
+    import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
     createApp({
       setup() {
@@ -43,7 +42,7 @@
         function reset() {
           count.value = 0
         }
-        
+
         return {
           count,
           increment,
